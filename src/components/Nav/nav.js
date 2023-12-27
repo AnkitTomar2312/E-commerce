@@ -38,7 +38,7 @@ const Nav = () => {
             Logout
           </Link>
         ) : (
-          <Link to="/register">SignUp</Link>
+          <Link to="/register">SignUp...</Link>
         )}
       </li>
     </ul>
