@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 const Register = () => {
   const naviagte = useNavigate();
@@ -16,10 +16,20 @@ const Register = () => {
     });
     result = await result.json();
     console.warn(result);
+    localStorage.setItem("user", JSON.stringify(result));
     if (result) {
+      alert("successfully registered");
       naviagte("/");
     }
   };
+
+  useEffect(() => {
+    const auth = localStorage.getItem("user");
+    if (auth) {
+      naviagte("/");
+    }
+  }, []);
+
   return (
     <>
       <h1>Registration Form</h1>

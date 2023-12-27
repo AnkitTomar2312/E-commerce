@@ -1,6 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
-const nav = () => {
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+const Nav = () => {
+  const auth = localStorage.getItem("user");
+  const naviagate = useNavigate();
+  const logout = () => {
+    localStorage.clear();
+    naviagate("/register");
+  };
   return (
     <ul
       type="none"
@@ -22,17 +28,21 @@ const nav = () => {
       <li>
         <Link to="/update-product">Update Product</Link>
       </li>
-      <li>
-        <Link to="/logout">Logout</Link>
-      </li>
+
       <li>
         <Link to="/profile">Profile</Link>
       </li>
       <li>
-        <Link to="/register">SignUp</Link>
+        {auth ? (
+          <Link to="/register" onClick={() => logout()}>
+            Logout
+          </Link>
+        ) : (
+          <Link to="/register">SignUp</Link>
+        )}
       </li>
     </ul>
   );
 };
 
-export default nav;
+export default Nav;
