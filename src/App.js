@@ -3,6 +3,7 @@ import "./App.css";
 import Nav from "./components/Nav/nav";
 import Footer from "./components/Footer/footer";
 import Register from "./components/register";
+import Login from "./components/LogIn";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PrivateComponent from "./components/PrivateComponent";
 function App() {
@@ -25,6 +26,7 @@ function App() {
             <Route path="/profile" element={<h1>profile component</h1>} />
           </Route>
           <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
         <Footer />
       </BrowserRouter>
