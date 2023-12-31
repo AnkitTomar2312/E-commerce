@@ -36,4 +36,14 @@ app.post("/add-product", async (req, res) => {
   let result = await product.save();
   res.send(result);
 });
+
+//ProductLIst API:-
+app.get("/product-list", async (req, res) => {
+  let ProductList = await Product.find();
+  if (ProductList.length > 0) {
+    res.send(ProductList);
+  } else {
+    res.send({ result: "No product yet to show" });
+  }
+});
 app.listen(5000);
