@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const AddProduct = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [price, setprice] = useState("");
   const [category, setcategory] = useState("");
@@ -15,7 +17,8 @@ const AddProduct = () => {
       },
     });
     result = await result.json();
-    console.log(result);
+    alert("Product Added Successfully");
+    navigate("/");
   };
   return (
     <div>
@@ -33,7 +36,7 @@ const AddProduct = () => {
         <input
           style={{ padding: "24px" }}
           type="text"
-          placeholder="Enter Your Name..."
+          placeholder="Enter Product Name..."
           onChange={(e) => {
             setName(e.target.value);
           }}
