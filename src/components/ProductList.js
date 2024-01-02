@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const ProductList = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   useEffect(() => {
     getProdcut();
@@ -24,6 +26,7 @@ const ProductList = () => {
       alert("Some error occured");
     }
   };
+
   return (
     <div>
       <h1>Product List</h1>
@@ -49,7 +52,6 @@ const ProductList = () => {
             </tr>
           </thead>
           <tbody>
-            {" "}
             {products.map((item, index) => {
               return (
                 <tr key={index}>
@@ -58,7 +60,7 @@ const ProductList = () => {
                   <td align="center">{item.category}</td>
                   <td align="center">{item.company}</td>
                   <td align="center">${item.price}</td>
-                  <td>
+                  <td align="center">
                     <button
                       style={{
                         width: "100%",
@@ -73,16 +75,14 @@ const ProductList = () => {
                       Delete
                     </button>
                     <br />
-                    <button
+                    <Link
+                      to={"/update-product/" + item._id}
                       style={{
-                        width: "100%",
-                        backgroundColor: "green",
-                        color: "white",
                         fontSize: "20px",
                       }}
                     >
                       Update
-                    </button>
+                    </Link>
                   </td>
                 </tr>
               );

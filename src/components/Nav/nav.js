@@ -33,7 +33,7 @@ const Nav = () => {
             <Link to="/add-product">Add Product</Link>
           </li>
           <li>
-            <Link to="/update-product">Update Product</Link>
+            <Link to="/update-product/:id">Update Product</Link>
           </li>
 
           <li>
