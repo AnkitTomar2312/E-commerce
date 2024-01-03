@@ -27,9 +27,32 @@ const ProductList = () => {
     }
   };
 
+  const handleSearch = async (e) => {
+    let key = e.target.value;
+    if (key) {
+      let result = await fetch(`http://localhost:5000/search/${key}`, {
+        method: "Get",
+      });
+      result = await result.json();
+      setProducts(result);
+    } else {
+      getProdcut();
+    }
+  };
   return (
     <div>
       <h1>Product List</h1>
+      <input
+        style={{
+          padding: " 20px 60px",
+          marginTop: "48px",
+          borderRadius: "15px",
+          fontSize: "22px",
+        }}
+        type="text"
+        placeholder="Search..."
+        onChange={handleSearch}
+      />
       <center>
         <table
           border="2"
@@ -52,41 +75,49 @@ const ProductList = () => {
             </tr>
           </thead>
           <tbody>
-            {products.map((item, index) => {
-              return (
-                <tr key={index}>
-                  <td align="center">{index + 1}</td>
-                  <td align="center">{item.name}</td>
-                  <td align="center">{item.category}</td>
-                  <td align="center">{item.company}</td>
-                  <td align="center">${item.price}</td>
-                  <td align="center">
-                    <button
-                      style={{
-                        width: "100%",
-                        backgroundColor: "red",
-                        color: "white",
-                        fontSize: "20px",
-                      }}
-                      onClick={() => {
-                        deleteOne(item._id);
-                      }}
-                    >
-                      Delete
-                    </button>
-                    <br />
-                    <Link
-                      to={"/update-product/" + item._id}
-                      style={{
-                        fontSize: "20px",
-                      }}
-                    >
-                      Update
-                    </Link>
-                  </td>
-                </tr>
-              );
-            })}
+            {products.length ? (
+              products.map((item, index) => {
+                return (
+                  <tr key={index}>
+                    <td align="center">{index + 1}</td>
+                    <td align="center">{item.name}</td>
+                    <td align="center">{item.category}</td>
+                    <td align="center">{item.company}</td>
+                    <td align="center">${item.price}</td>
+                    <td align="center">
+                      <button
+                        style={{
+                          width: "100%",
+                          backgroundColor: "red",
+                          color: "white",
+                          fontSize: "20px",
+                        }}
+                        onClick={() => {
+                          deleteOne(item._id);
+                        }}
+                      >
+                        Delete
+                      </button>
+                      <br />
+                      <Link
+                        to={"/update-product/" + item._id}
+                        style={{
+                          fontSize: "20px",
+                        }}
+                      >
+                        Update
+                      </Link>
+                    </td>
+                  </tr>
+                );
+              })
+            ) : (
+              <tr>
+                <th colSpan="6">
+                  <h1>No Result Found..</h1>
+                </th>
+              </tr>
+            )}
           </tbody>
         </table>
       </center>
