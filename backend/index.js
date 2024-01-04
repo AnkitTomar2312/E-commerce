@@ -5,6 +5,8 @@ require("./db/config");
 const User = require("./db/Users");
 const Product = require("./db/Product");
 const app = express();
+const Jwt = require("jsonwebtoken");
+const JwtKey = "e-comm";
 //using middleware
 app.use(express.json());
 app.use(cors());
@@ -15,7 +17,14 @@ app.post("/register", async (req, res) => {
   // deleting password from the response
   result = result.toObject();
   delete result.password;
-  res.send(result);
+  Jwt.sign({ result }, JwtKey, { expiresIn: "2h" }, (err, token) => {
+    if (err) {
+      res.send({
+        result: "Something went wrong please try after some time",
+      });
+    }
+    res.send({ result, auth: token });
+  });
 });
 //login API
 app.post("/login", async (req, res) => {
@@ -23,7 +32,14 @@ app.post("/login", async (req, res) => {
   if (req.body.password && req.body.email) {
     let user = await User.findOne(req.body).select("-password");
     if (user) {
-      res.send(user);
+      Jwt.sign({ user }, JwtKey, { expiresIn: "2h" }, (err, token) => {
+        if (err) {
+          res.send({
+            result: "Something went wrong please try after some time",
+          });
+        }
+        res.send({ user, auth: token });
+      });
     } else {
       res.send({ result: "no user found" });
     }
