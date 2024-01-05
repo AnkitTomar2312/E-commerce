@@ -104,4 +104,6 @@ app.get("/search/:key", async (req, res) => {
   res.send(result);
 });
 
+//creating a middle-ware for verifying token
+
 app.listen(5000);
