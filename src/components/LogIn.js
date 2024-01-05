@@ -20,7 +20,7 @@ const Login = () => {
       },
     });
     result = await result.json();
-    console.warn(result);
+
     if (result.auth) {
       localStorage.setItem("user", JSON.stringify(result.user));
       localStorage.setItem("token", JSON.stringify(result.auth));
@@ -30,7 +30,7 @@ const Login = () => {
     }
   };
   return (
-    <div>
+    <div div style={{ paddingTop: "60px" }}>
       <h1>Log-In Form</h1>
       <div
         style={{

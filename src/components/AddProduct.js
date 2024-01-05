@@ -7,13 +7,13 @@ const AddProduct = () => {
   const [category, setcategory] = useState("");
   const [company, setcompany] = useState("");
   const AddProduct = async () => {
-    console.warn(name, price, category, company);
     const userId = JSON.parse(localStorage.getItem("user"));
     let result = await fetch("http://localhost:5000/add-product", {
       method: "post",
       body: JSON.stringify({ name, price, category, userId, company }),
       headers: {
         "Content-Type": "application/json",
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
       },
     });
     result = await result.json();
@@ -31,6 +31,7 @@ const AddProduct = () => {
           alignItems: "center",
           gap: "25px",
           paddingBottom: "80px",
+          paddingTop: "48px",
         }}
       >
         <input

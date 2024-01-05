@@ -9,6 +9,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PrivateComponent from "./components/PrivateComponent";
 import ProductList from "./components/ProductList";
 import UpdateProduct from "./components/UpdateProduct";
+import Profile from "./components/Profile";
 function App() {
   return (
     <div className="App">
@@ -20,7 +21,7 @@ function App() {
             <Route path="/add-product" element={<AddProduct />} />
             <Route path="/update-product/:id" element={<UpdateProduct />} />
             <Route path="/logout" element={<h1>logout component</h1>} />
-            <Route path="/profile" element={<h1>profile component</h1>} />
+            <Route path="/profile" element={<Profile />} />
           </Route>
           {/* Not Private Components */}
           <Route path="/register" element={<Register />} />

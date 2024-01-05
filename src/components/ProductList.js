@@ -12,7 +12,7 @@ const ProductList = () => {
     let result = await fetch("http://localhost:5000/product-list", {
       method: "Get",
       headers: {
-        authorization: JSON.parse(localStorage.getItem("token")),
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
       },
     });
     result = await result.json();
@@ -22,6 +22,9 @@ const ProductList = () => {
     console.log("clicked");
     const result = fetch(`http://localhost:5000/product/${id}`, {
       method: "Delete",
+      headers: {
+        authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+      },
     });
 
     if (result) {
@@ -37,6 +40,9 @@ const ProductList = () => {
     if (key) {
       let result = await fetch(`http://localhost:5000/search/${key}`, {
         method: "Get",
+        headers: {
+          authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
       });
       result = await result.json();
       setProducts(result);
@@ -67,6 +73,7 @@ const ProductList = () => {
             height: "auto",
             width: "80vw",
             marginTop: "48px",
+            marginBottom: "68px",
           }}
         >
           <thead>
