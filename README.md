@@ -1,3 +1,4 @@
+# This project has two branch master for server code and front-end branch for frontend code
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
