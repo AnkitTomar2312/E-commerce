@@ -111,13 +111,13 @@ function verifyToken(req, res, next) {
     token = token.split(" ")[1];
     Jwt.verify(token, JwtKey, (err, valid) => {
       if (err) {
-        res.send({ result: "Please provide valid token" });
+        res.status(401).send({ result: "Please provide valid token" });
       } else {
         next();
       }
     });
   } else {
-    res.send({ result: "Please provide token" });
+    res.send(403).send({ result: "Please provide token" });
   }
 }
 
